@@ -1,0 +1,42 @@
+﻿<ArcGIS defaultAssembly="TableControlDemo.dll" defaultNamespace="TableControlDemo" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{744d56dc-6bf0-4bf2-baab-76741c702aef}" version="1.0" desktopVersion="3.3.52636" product="ArcGISPro">
+    <Name>TableControlDemo</Name>
+    <Description>TableControlDemo description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>gkmieliauskas</Author>
+    <Company>Acme</Company>
+    <Date>11/10/2025 1:43:53 PM</Date>
+    <Subject>Framework</Subject>
+    <!-- Note subject can be one or more of these topics:
+                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+  </AddInInfo>
+  <modules>
+    <insertModule id="TableControlDemo_Module" className="Module1" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="TableControlDemo_Tab1" caption="New Tab">
+          <group refID="TableControlDemo_Group1"/>
+        </tab>-->
+      </tabs>
+      <groups>
+        <!-- comment this out if you have no controls on the Addin tab to avoid
+              an empty group-->
+        <group id="TableControlDemo_Group1" caption="TableControl Demo" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="TableControlDemo_TableControlDockpane_ShowButton" size="large" />
+        </group>
+      </groups>
+      <controls>
+        <!-- add your controls here -->
+        <button id="TableControlDemo_TableControlDockpane_ShowButton" caption="Show TableControlDockpane" className="TableControlDockpane_ShowButton" loadOnClick="true" smallImage="GenericButtonPurple16" largeImage="GenericButtonPurple32">
+          <tooltip heading="Show Dockpane">Show Dockpane<disabledText /></tooltip>
+        </button>
+      </controls>
+      <dockPanes>
+        <dockPane id="TableControlDemo_TableControlDockpane" caption="Data Preview" className="TableControlDockpaneViewModel" dock="bottom">
+          <content className="TableControlDockpaneView" />
+        </dockPane>
+      </dockPanes>
+    </insertModule>
+  </modules>
+</ArcGIS>

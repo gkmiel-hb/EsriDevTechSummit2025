@@ -1,0 +1,45 @@
+﻿<ArcGIS defaultAssembly="TableViewDemo.dll" defaultNamespace="TableViewDemo" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{15c95a61-5e57-4201-9ad6-760d97dbb898}" version="1.0" desktopVersion="3.3.52636" product="ArcGISPro">
+    <Name>TableViewDemo</Name>
+    <Description>TableViewDemo description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>gkmieliauskas</Author>
+    <Company>Acme</Company>
+    <Date>11/10/2025 1:05:01 PM</Date>
+    <Subject>Framework</Subject>
+    <!-- Note subject can be one or more of these topics:
+                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+  </AddInInfo>
+  <modules>
+    <insertModule id="TableViewDemo_Module" className="Module1" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="TableViewDemo_Tab1" caption="New Tab">
+          <group refID="TableViewDemo_Group1"/>
+        </tab>-->
+      </tabs>
+      <groups>
+        <!-- comment this out if you have no controls on the Addin tab to avoid
+              an empty group-->
+        <group id="TableViewDemo_Group1" caption="TableView Demo" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="TableViewDemo_OpenTableView" size="large" />
+          <button refID="TableViewDemo_ManageFields" size="large" />
+          <button refID="TableViewDemo_ManageView" size="large" />
+        </group>
+      </groups>
+      <controls>
+        <!-- add your controls here -->
+        <button id="TableViewDemo_OpenTableView" caption="Open Table View" className="OpenTableView" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+        <button id="TableViewDemo_ManageFields" caption="Manage Fields" className="ManageFields" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+        <button id="TableViewDemo_ManageView" caption="Manage View" className="ManageView" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+      </controls>
+    </insertModule>
+  </modules>
+</ArcGIS>

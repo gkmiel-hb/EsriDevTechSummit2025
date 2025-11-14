@@ -1,0 +1,44 @@
+﻿<ArcGIS defaultAssembly="InspectorDemo.dll" defaultNamespace="InspectorDemo" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{eb9036bc-5942-491c-b9b6-d81d135124ea}" version="1.0" desktopVersion="3.3.52636" product="ArcGISPro">
+    <Name>InspectorDemo</Name>
+    <Description>InspectorDemo description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>gkmieliauskas</Author>
+    <Company>Acme</Company>
+    <Date>11/10/2025 10:02:06 AM</Date>
+    <Subject>Framework</Subject>
+    <!-- Note subject can be one or more of these topics:
+                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+  </AddInInfo>
+  <modules>
+    <insertModule id="InspectorDemo_Module" className="Module1" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="InspectorDemo_Tab1" caption="New Tab">
+          <group refID="InspectorDemo_Group1"/>
+        </tab>-->
+      </tabs>
+      <groups>
+        <!-- comment this out if you have no controls on the Addin tab to avoid
+              an empty group-->
+        <group id="InspectorDemo_Group1" caption="Inspector Demo" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="InspectorDemo_InspectorDockpane_ShowButton" size="large" />
+          <button refID="esri_mapping_selectByRectangleTool" size="middle"/>
+          <button refID="esri_mapping_clearSelectionButton" size="middle" />
+        </group>
+      </groups>
+      <controls>
+        <!-- add your controls here -->
+        <button id="InspectorDemo_InspectorDockpane_ShowButton" caption="Show Inspector" className="InspectorDockpane_ShowButton" loadOnClick="true" smallImage="GenericButtonPurple16" largeImage="GenericButtonPurple32">
+          <tooltip heading="Show Dockpane">Show Dockpane<disabledText /></tooltip>
+        </button>
+      </controls>
+      <dockPanes>
+        <dockPane id="InspectorDemo_InspectorDockpane" caption="InspectorDockpane" className="InspectorDockpaneViewModel" dock="group" dockWith="esri_core_projectDockPane">
+          <content className="InspectorDockpaneView" />
+        </dockPane>
+      </dockPanes>
+    </insertModule>
+  </modules>
+</ArcGIS>
