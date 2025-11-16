@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>OpenAndActivateTablePane method</Title>
+    <Description>Adds static method in module class.</Description>
+    <Shortcut>step4v</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[        /// <summary>
+        /// utility function to open and activate the TablePane for a given MapMember
+        /// </summary>
+        /// <param name="mapMember">table to have the table view activated</param>
+        internal static ITablePane OpenAndActivateTablePane(MapMember mapMember)
+        {
+            // check the open panes to see if it's open but just needs activating
+            IEnumerable<ITablePane> tablePanes = FrameworkApplication.Panes.OfType<ITablePane>();
+            foreach (var tablePane in tablePanes)
+            {
+                if (tablePane.MapMember != mapMember) continue;
+                var pane = tablePane as Pane;
+                pane?.Activate();
+                return pane as ITablePane;
+            }
+
+            // it's not currently open... so open it
+            if (FrameworkApplication.Panes.CanOpenTablePane(mapMember))
+            {
+                var iTablePane = FrameworkApplication.Panes.OpenTablePane(mapMember);
+                return iTablePane;
+            }
+
+            return null;
+        }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

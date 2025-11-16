@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Buttons properties</Title>
+    <Description>Adds properties for button binding.</Description>
+    <Shortcut>step7</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[#region Apply/Cancel business logic
+        public bool IsApplyEnabled => AttributeInspector?.IsDirty ?? false;
+        public bool IsCancelEnabled => AttributeInspector?.IsDirty ?? false;
+
+        private ICommand _cancelCommand;
+        public ICommand CancelCommand
+        {
+            get
+            {
+                if (_cancelCommand == null)
+                    _cancelCommand = new RelayCommand(OnCancel);
+                return _cancelCommand;
+            }
+        }
+
+        internal void OnCancel()
+        {
+            AttributeInspector?.Cancel();
+        }
+
+        private ICommand _applyCommand;
+        public ICommand ApplyCommand
+        {
+            get
+            {
+                if (_applyCommand == null)
+                    _applyCommand = new RelayCommand(OnApply);
+                return _applyCommand;
+            }
+        }
+
+        internal void OnApply()
+        {
+            QueuedTask.Run(() =>
+            {
+                //Apply the attribute changes.
+                //Writing them back to the database in an Edit Operation.
+                AttributeInspector?.Apply();
+            });
+        }
+        #endregion]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

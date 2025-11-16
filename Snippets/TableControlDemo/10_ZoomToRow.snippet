@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Zoom to Row command</Title>
+    <Description>Adds business logic for Zoom to Row context menu item.</Description>
+    <Shortcut>step10c</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[        private ICommand _zoomToRowCommand = null;
+        public ICommand ZoomToRowCommand
+        {
+            get
+            {
+                if (_zoomToRowCommand == null)
+                {
+                    _zoomToRowCommand = new RelayCommand(() =>
+                    {
+                        // if we have some content, a map and our data is added to the map
+                        if (_tableControl?.TableContent != null && MapView.Active != null && SelectedMapMember is Layer)
+                        {
+                            // get the oid of the active row
+                            var oid = _tableControl.GetObjectIdAsync(_tableControl.ActiveRowIndex).Result;
+                            // load into an inspector to obtain the Shape
+                            var insp = new Inspector();
+                            insp.LoadAsync(SelectedMapMember, oid).ContinueWith((t) =>
+                            {
+                                // zoom
+                                MapView.Active.ZoomToAsync(insp.Shape.Extent, new TimeSpan(0, 0, 0, 1));
+                            });
+                        }
+                    });
+                }
+                return _zoomToRowCommand;
+            }
+        }
+
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Table pane opening</Title>
+    <Description>Opens table pane in OnClick.</Description>
+    <Shortcut>step3v</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[            if (MapView.Active?.Map == null)
+            {
+                return;
+            }
+
+            // activate the Tax table view as the active view
+            var layer = MapView.Active.Map.GetLayersAsFlattenedList().OfType<FeatureLayer>().FirstOrDefault();
+            if (layer == null)
+            {
+                return;
+            }
+
+            Module1.OpenAndActivateTablePane(layer);
+
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

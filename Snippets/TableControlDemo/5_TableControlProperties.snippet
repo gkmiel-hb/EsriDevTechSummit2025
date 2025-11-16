@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>TableControl properties</Title>
+    <Description>Adds binding properties for TableControl.</Description>
+    <Shortcut>step5c</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[    private TableControlContent _tableContent;
+    public TableControlContent TableContent
+    {
+      get { return _tableContent; }
+      set { SetProperty(ref _tableContent, value); }
+    }
+
+    private TableControl _tableControl;
+    public TableControl TableControl 
+    {
+        get { return _tableControl; }
+        set { SetProperty(ref _tableControl, value); }
+    }
+
+    private Item _selectedItem = null;
+    public bool IsItemSelected
+    {
+        get { return _selectedItem != null; }
+    }
+
+    private MapMember SelectedMapMember = null;
+
+    public ContextMenu RowContextMenu { get; set; }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

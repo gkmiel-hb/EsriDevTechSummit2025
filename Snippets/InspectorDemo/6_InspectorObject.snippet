@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Inspector object</Title>
+    <Description>Creates Inspector object and sets binding properties.</Description>
+    <Shortcut>step6</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[// the standard way of creating an inspector
+            #region Inspector UI with out-of-box Provider
+            //TODO: Use this line to create an inspector using the out-of-box provider
+            // but make sure to comment out the 'Inspector UI with Provider' code below
+            _featureInspector = new Inspector();
+            #endregion Inspector UI with out-of-box Provider
+
+            #region Inspector UI with Provider
+            //TODO: this block creates a customized inspector based on the provider
+            // this allows to customize the grid view
+            // but make sure to comment out the 'Inspector UI with out-of-box Provider' code above
+
+            //create the custom provider
+            //DemoProvider provider = new DemoProvider();
+            //create the inspector from the provider
+            //_featureInspector = provider.Create();
+            #endregion Inspector UI with Provider
+
+            // create the embeddable control from the inspector (to display on the pane)
+            var icontrol = _featureInspector.CreateEmbeddableControl();
+
+            // get view and viewmodel from the inspector
+            InspectorViewModel = icontrol.Item1;
+            InspectorView = icontrol.Item2;]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

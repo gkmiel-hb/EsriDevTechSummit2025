@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Inspector properties</Title>
+    <Description>Adds binding properties for TreeView and Inspector.</Description>
+    <Shortcut>step5</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[// Binding property: Property containing the treeview itemsource
+        private Dictionary<MapMember, List<long>> _selectedMapFeatures = new Dictionary<MapMember, List<long>>();
+        public Dictionary<MapMember, List<long>> SelectedMapFeatures
+        {
+            get => _selectedMapFeatures;
+            set => SetProperty(ref _selectedMapFeatures, value, () => SelectedMapFeatures);
+        }
+
+        // Binding property: Property containing an instance for the inspector.
+        private readonly Inspector _featureInspector = null;
+        public Inspector AttributeInspector => _featureInspector;
+
+        // Binding property: Property containing the inspector viewmodel.
+        private EmbeddableControl _inspectorViewModel = null;
+        public EmbeddableControl InspectorViewModel
+        {
+            get => _inspectorViewModel;
+            set
+            {
+                if (value != null)
+                {
+                    _inspectorViewModel = value;
+                    //Occurs when the control is hosted - this is where the control is opened
+                    _inspectorViewModel.OpenAsync();
+                }
+                else if (_inspectorViewModel != null)
+                {
+                    //Occurs when the control is closed
+                    _inspectorViewModel.CloseAsync();
+                    _inspectorViewModel = value;
+                }
+                SetProperty(ref _inspectorViewModel, value, () => InspectorViewModel); //check this?
+            }
+        }
+
+        // Binding property: Property containing the inspector view.
+        private UserControl _inspectorView = null;
+        public UserControl InspectorView
+        {
+            get => _inspectorView;
+            set => SetProperty(ref _inspectorView, value, () => InspectorView);
+        }]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

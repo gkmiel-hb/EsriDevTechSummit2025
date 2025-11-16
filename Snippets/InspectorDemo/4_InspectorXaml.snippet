@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Inspector xaml content</Title>
+      <Author></Author>
+      <Description>Adds treeview and content presenter controls</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>step4</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Value</ID>
+          <ToolTip>The width of the column (fixed, star, Auto)</ToolTip>
+          <Default>1*</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="XAML">
+        <![CDATA[<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,6" Orientation="Vertical">
+            <TextBlock Text="Features:" Style="{Binding Esri_TextBlockH3}" FontWeight="Bold"/>
+            <!--WPF Treeview control-->
+            <TreeView x:Name="treeView"  ItemsSource="{Binding SelectedMapFeatures}" VerticalAlignment="Top" Width="Auto" Margin="0,6"
+                      SelectedItemChanged="treeView_SelectedItemChanged">
+                <TreeView.ItemTemplate >
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}">
+                        <TreeViewItem Header="{Binding Path=Key}" Foreground="{DynamicResource Esri_Gray155}" FontStyle="Italic"/>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }" />
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Attributes:" Style="{Binding Esri_TextBlockH3}" FontWeight="Bold"/>
+            <!--This is the ArcGIS Pro SDK Inspector UI-->
+            <ContentPresenter Grid.Row="1" Margin="0,6" Content="{Binding InspectorView}"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"/>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Background="Transparent" Margin="0,6">
+            <Button Margin="6,0,0,0" Content="Apply" Style="{DynamicResource Esri_Button}"
+               IsEnabled="{Binding IsApplyEnabled}" Command="{Binding ApplyCommand}"/>
+            <Button Margin="6,0,0,0" Content="Cancel" Style="{DynamicResource Esri_Button}"
+               IsEnabled="{Binding IsCancelEnabled}" Command="{Binding CancelCommand}"/>
+        </StackPanel>]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

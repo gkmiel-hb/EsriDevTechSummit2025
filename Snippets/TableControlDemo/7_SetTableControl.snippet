@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>TableControl setup</Title>
+    <Description>Sets TableControl property in OnActivate.</Description>
+    <Shortcut>step7c</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[        public static T GetChildOfType<T>(DependencyObject depObj)
+            where T : DependencyObject
+        {
+            if (depObj == null) return null;
+            for (int i = 0; i < System.Windows.Media.VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                var child = System.Windows.Media.VisualTreeHelper.GetChild(depObj, i);
+                System.Diagnostics.Debug.WriteLine(child.GetType());
+                var result = (child as T) ?? GetChildOfType<T>(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        protected override void OnActivate(bool isActive)
+        {
+            if (_tableControl == null)
+            {
+                _tableControl = GetChildOfType<TableControl>(this.Content);
+            }
+
+            base.OnActivate(isActive);
+        }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

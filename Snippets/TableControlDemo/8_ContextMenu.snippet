@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Context menu</Title>
+    <Description>Creates ContextMenu in ViewModel constructor.</Description>
+    <Shortcut>step8c</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[            MenuItem zoomItem = new MenuItem()
+            {
+                Header = "Zoom to Feature",
+                Command = ZoomToRowCommand,
+                CommandParameter = this
+            };
+            RowContextMenu = new ContextMenu();
+            RowContextMenu.Items.Add(zoomItem);
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

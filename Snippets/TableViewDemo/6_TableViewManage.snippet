@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Table view managing</Title>
+    <Description>Changes table pane content.</Description>
+    <Shortcut>step6v</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[            if (MapView.Active?.Map == null)
+            {
+                return;
+            }
+
+            // activate the Tax table view as the active view
+            var layer = MapView.Active.Map.GetLayersAsFlattenedList().OfType<FeatureLayer>().FirstOrDefault();
+            if (layer == null)
+            {
+                return;
+            }
+
+            var tablePane = Module1.OpenAndActivateTablePane(layer);
+            if (tablePane is ITablePaneEx tablePaneEx)
+            {
+                TableView tableView = tablePaneEx.TableView;
+                if (tableView != null && tableView.IsReady)
+                {
+                    // set visible and hidden columns
+                    tableView.ShowAllFields();
+                    // adds to hidden
+                    tableView.SetHiddenFields(new List<string> { "CREATEDBYRECORD", "RETIREDBYRECORD", "CalculatedArea", "MiscloseRatio", "MiscloseDistance", "IsSeed", "created_user", "created_date", "last_edited_user", "last_edited_date" });
+                    // clear and reset frozen fields
+                    var frozenFields = tableView.GetFrozenFields();
+                    if (!frozenFields.Contains("Name"))
+                    {
+                        await tableView.ClearAllFrozenFieldsAsync();
+                        await tableView.SetFrozenFieldsAsync(new List<string> { "OBJECTID", "Name" });
+
+		    // show selected items only
+                    await tableView.SetViewMode(TableViewMode.eSelectedRecords);
+		// zoom 
+                    tableView.SetZoomLevel(150);
+
+
+                    }
+                }
+            }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

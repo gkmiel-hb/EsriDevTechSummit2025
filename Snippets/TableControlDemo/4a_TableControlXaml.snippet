@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>TableControl xaml</Title>
+      <Author></Author>
+      <Description>Adds TableControl to dockpane</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>step4ca</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Value</ID>
+          <ToolTip>The width of the column (fixed, star, Auto)</ToolTip>
+          <Default>1*</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="XAML">
+        <![CDATA[        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False" Grid.Row="0">
+            <Button Content="Toggle Sel" Command="editing:TableControlCommands.SwitchSelection"
+              CommandTarget="{Binding ElementName=tableControl}"
+              Style="{DynamicResource Esri_Button}"/>
+
+            <Button Content="Select All" Command="editing:TableControlCommands.SelectAll"
+              CommandTarget="{Binding ElementName=tableControl}"
+              Style="{DynamicResource Esri_Button}"/>
+
+            <Button Content="Add To Map" Command="{Binding AddToMapCommand}"
+              Style="{DynamicResource Esri_Button}"/>
+
+            <Button Content="Find" Command="editing:TableControlCommands.Find"
+              CommandTarget="{Binding ElementName=tableControl}"
+              Style="{DynamicResource Esri_Button}"/>
+        </DockPanel>
+        <editing:TableControl x:Name="tableControl" Grid.Row="1" TableContent="{Binding Path=TableContent}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+					RowContextMenu="{Binding RowContextMenu}" SelectedRowContextMenu="{Binding RowContextMenu}" >
+        </editing:TableControl>]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

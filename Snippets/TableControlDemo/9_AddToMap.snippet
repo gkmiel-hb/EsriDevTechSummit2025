@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Add to Map</Title>
+    <Description>Adds business logic for Add to Map button.</Description>
+    <Shortcut>step9c</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[        private ICommand _addToMapCommand = null;
+        public ICommand AddToMapCommand
+        {
+            get
+            {
+                if (_addToMapCommand == null)
+                {
+                    _addToMapCommand = new RelayCommand(() =>
+                    {
+                        var map = MapView.Active?.Map;
+                        if (map == null)
+                            return;
+
+                        QueuedTask.Run(() =>
+                        {
+                            StandaloneTableCreationParams tableCreationParams = new StandaloneTableCreationParams(_selectedItem);
+                            // test if the selected Catalog item can create a layer
+                            if (LayerFactory.Instance.CanCreateLayerFrom(_selectedItem))
+                                SelectedMapMember = LayerFactory.Instance.CreateLayer<Layer>(new LayerCreationParams(_selectedItem), map);
+                            // test if the selected Catalog item can create a table
+                            else if (StandaloneTableFactory.Instance.CanCreateStandaloneTableFrom(_selectedItem))
+                                SelectedMapMember = StandaloneTableFactory.Instance.CreateStandaloneTable(tableCreationParams, map);
+
+                            else
+                                SelectedMapMember = null;
+                        });
+
+                    });
+                }
+                return _addToMapCommand;
+            }
+        }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

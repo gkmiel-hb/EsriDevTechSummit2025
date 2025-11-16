@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>OnProjectWindowSelectedItem method</Title>
+    <Description>Adds OnProjectWindowSelectedItem method.</Description>
+    <Shortcut>step6ca</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[    private void OnProjectWindowSelectedItem(ProjectWindowSelectedItemsChangedEventArgs args)
+    {
+      if (args.IProjectWindow.SelectionCount > 0)
+      {
+        SelectedMapMember = null;
+
+        // get the first selected item
+        _selectedItem = args.IProjectWindow.SelectedItems.First();
+        NotifyPropertyChanged(nameof(IsItemSelected));
+
+        // check if it's supported by the TableControl
+        if (!TableControlContentFactory.IsItemSupported(_selectedItem))
+          return;
+
+        // create the content
+        var tableContent = TableControlContentFactory.Create(_selectedItem);
+
+        // assign it
+        if (tableContent != null)
+        {
+          this.TableContent = tableContent;
+        }
+      }
+    }
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
